@@ -1,0 +1,71 @@
+---
+title: "Visitor Recency and Loyalty"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library("googleAuthR")
+library("googleAnalyticsR")
+library("ggplot2")
+library("scales")
+```
+
+```{r, include=FALSE}
+ga_data = read.csv("Analytics 1 Master View New vs Returning 20170606-20170612.csv", sep=",", header=T)
+# cleaning up data
+ga_data.toPlot = data.frame(userType = c("New Visitor", "Returning Visitor"), sessions =ga_data$Users[1:2])
+ga_data.toPlot$sessions = as.numeric(gsub(",", "", ga_data.toPlot$sessions))
+# add as percentage
+ga_data.toPlot$percentage = ga_data.toPlot$sessions/sum(ga_data.toPlot$sessions)
+
+# naming something consistent
+toPlot.NewvsReturningVisitors = ga_data.toPlot
+```
+
+```{r, include=FALSE}
+# using example file
+ga_data = read.csv("Analytics 1 Master View Frequency & Recency 20170414-20170614.csv", sep=",", header=T)
+
+# making sure our axis show up correctly
+CountOfSessions = rev(ga_data$Count.of.Sessions)
+ga_data$Count.of.Sessions =  factor(ga_data$Count.of.Sessions, levels = CountOfSessions)
+
+ga_data$Users = as.numeric(gsub(",", "", ga_data$Users))
+# calculate percentage
+ga_data$UsersPercentage = ga_data$Users / sum(ga_data$Users)
+
+toPlot.PagesPerUser = ga_data
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### New vs Returning Visitors
+
+```{r}
+
+  theme_set(theme_bw())
+  ggplot(toPlot.NewvsReturningVisitors, aes(x=userType, y=sessions, fill=userType))+geom_bar(width = 0.6, stat="identity")+geom_text(aes(y = sessions/2, label = percent(percentage), size=5),show.legend = FALSE)+ylab("Number of Visitors") +  scale_y_continuous(breaks=seq(0,15000,1000))+
+  labs(title="Visitor Plot", 
+       subtitle="New Vs Returning Visitors")
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### PagesPerUser
+
+```{r}
+
+# Draw plot
+ggplot(toPlot.PagesPerUser, aes(x=Count.of.Sessions, y=Users)) + 
+  geom_bar(stat="identity", width=.8, fill="tomato3") + coord_flip()  +  geom_text(aes(y = Users, label = percent(UsersPercentage)),  hjust = -0.1)+ scale_y_continuous(breaks = seq(0,110000,20000),limits = c(0,110000),labels = comma) + ylab("Number of Sessions") + xlab("Number of Users") + 
+
+ labs(title="Loyalty plot", 
+       subtitle="Number of Sessions per User") + 
+  theme(axis.text.x = element_text(angle=45, vjust=0.6)) 
+```
