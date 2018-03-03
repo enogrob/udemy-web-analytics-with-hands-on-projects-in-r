@@ -18,12 +18,12 @@ Learn everything you need to about the subject of this `Udemy` project.
 Section: 1
 2 / 6
 Introduction to Web Analytics and R
-[ ] 1. The Course Overview 6:24
-[ ] 2. Why Use Web Analytics? 5:32
-[ ] 3. Why Use Google Analytics? 3:38
-[ ] 4. Why R Is Perfect for Web Analytics? 4:15
-[ ] 5. Installing R and RStudio 7:43
-[ ] 6. Installing and Setting Up Google Analytics Account 7:47
+[x] 1. The Course Overview 6:24
+[x] 2. Why Use Web Analytics? 5:32
+[x] 3. Why Use Google Analytics? 3:38
+[x] 4. Why R Is Perfect for Web Analytics? 4:15
+[x] 5. Installing R and RStudio 7:43
+[x] 6. Installing and Setting Up Google Analytics Account 7:47
 
 Section: 2
 0 / 4
