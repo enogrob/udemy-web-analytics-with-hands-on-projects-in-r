@@ -28,10 +28,10 @@ Introduction to Web Analytics and R
 Section: 2
 0 / 4
 Installing Packages and Dashboards
-[ ] 7. GoogleAnalyticsR Package 8:59
-[ ] 8. ggplot2 Package 6:21
-[ ] 9. Useful Links for googleAnalyticsR and ggplot2 3:09
-[ ] 10. Why Use Dashboards? 10:14
+[x] 7. GoogleAnalyticsR Package 8:59
+[x] 8. ggplot2 Package 6:21
+[x] 9. Useful Links for googleAnalyticsR and ggplot2 3:09
+[x] 10. Why Use Dashboards? 10:14
 
 Section: 3
 0 / 4
